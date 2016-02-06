@@ -241,9 +241,8 @@ def main():
     print('beginning of the end...')
 
     print Bencoder().encode( {"lists" : [1,2,3,4 ] })
-    print Bencoder().decode(r'..\content\torrents\[kat.cr]jobs.2013.1080p.bluray.x264.ac3.etrg.torrent')
-
-    decoded = Bencoder().decode(r'..\content\torrents\[kat.cr]jobs.2013.1080p.bluray.x264.ac3.etrg.torrent')
+    print Bencoder().decode(r'..\content\torrents\Zenith (2011) (theora).torrent')
+    decoded = Bencoder().decode(r'..\content\torrents\Zenith (2011) (theora).torrent')
 
 
     f = open('output.torrent', 'wb+')
