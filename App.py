@@ -1,5 +1,8 @@
-import lib.Bencoder
-import lib.Tracker
+from lib.Bencoder import Bencoder
+from lib.Tracker import Tracker
+
+from lib.Tracker import announce_udp
+import itertools
 import hashlib
 import bencode
 
@@ -13,16 +16,20 @@ __author__ = 'User'
 
 if __name__ == '__main__':
 
-    torrent = lib.Bencoder.read()
+    decoded = Bencoder().decode(r'.\content\torrents\The Great Book Of Best Quotes Of All Time By Abhi Sharma.torrent')
+    encoded = Bencoder().encode(decoded["info"])
 
-    # bytes = []
-    # pieces = torrent['info']['pieces']
-    #
-    # for num in range(0, 20):
-    #     bytes.append(pieces[num])
-    #
-    # hash = ''.join('{:02x}'.format(x) for x in pieces)
-    #
+    print("something")
+
+    h = hashlib.new('sha1')
+    h.update(encoded)
+    info_hash = h.hexdigest()
+
+    info, peers = Tracker().announce(decoded["announce-list"], info_hash, 100000,0,0 )
 
 
-    print(torrent)
+    for p in peers:
+        print "IP: {} Port: {}".format(p["IP"], p["port"])
+
+    print(info_hash)
+
